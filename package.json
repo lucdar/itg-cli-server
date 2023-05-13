@@ -1,0 +1,22 @@
+{
+  "name": "itg-cli-server",
+  "version": "1.0.0",
+  "description": "http interface for itg-cli for remote machine administration",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucdar/itg-cli-server.git"
+  },
+  "author": "Lucas Clark",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lucdar/itg-cli-server/issues"
+  },
+  "homepage": "https://github.com/lucdar/itg-cli-server#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
