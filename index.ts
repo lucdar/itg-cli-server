@@ -1,32 +1,25 @@
-import express from 'express';
+// import express from 'express';
 import { spawn } from 'child_process';
-const app = express();
+import http from 'http';
+// const app = express();
 const port = 9207; // default port to listen on
+import { ping } from './channels/ping'; 
 
-app.get('/', (req, res) => {
-    // ensure the query parameter is a string
-    const command = req.query['command'];
-    if (command === undefined) {
-        console.log("Missing query parameter");
-        res.send('Missing query parameters');
-        return;
-    }
-    if (typeof command !== 'string') {
-        console.log("Invalid query parameter");
-        res.send('Invalid query parameter');
-        return;
-    }
+// add support for multiple responses from the python process using sockets
+import { Server } from "socket.io";
+const server = http.createServer();
+const io = new Server(server);
 
-    // spawn a new itg-cli python process and send the output to the client
-    const pythonProcess = spawn('python3',["../itg-cli/main.py", command]);
-    pythonProcess.stdout.on('data', (data) => {
-        console.log("Sending response: ", data.toString());
-        res.send({ output: data.toString() });
+io.on('connection', (socket) => {
+    console.log('a user connected');
+    socket.on('disconnect', () => {
+        console.log('user disconnected');
+    })
+    socket.on('ping', (data: number) => {
+        ping(socket, data);
     });
-    // TODO: add support for multiple responses
-    //       might need to use a different package than express
-    // TODO: add robust error handling
 });
 
-console.log(`Listening on port ${port}...`);
-app.listen(port);
+server.listen(port, () => {
+    console.log(`server started at http://localhost:${port}`);
+});

@@ -17,10 +17,9 @@
   },
   "homepage": "https://github.com/lucdar/itg-cli-server#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "socket.io": "^4.6.2"
   },
   "devDependencies": {
-    "@types/express": "^4.17.17",
     "@types/node": "^20.1.5",
     "ts-node": "^10.9.1",
     "tslib": "^2.5.0"
