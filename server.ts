@@ -16,7 +16,7 @@ io.on('connection', (socket) => {
     })
     // Create channel listeners
     for (let channel of channels) {
-        socket.on(channel.name, (...args) => {
+        socket.on(channel.name, (args) => {
             channel.execute(socket, args);
         });
     }

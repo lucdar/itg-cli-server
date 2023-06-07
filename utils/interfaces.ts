@@ -2,7 +2,7 @@ import { Socket } from "socket.io";
 
 export interface Channel {
     /**
-     * Name of the channel. 
+     * Name of the channel.
      */
     name: string;
     /**
@@ -10,11 +10,7 @@ export interface Channel {
      */
     description: string;
     /**
-     *  Arguments that the channel takes.
+     *  Data that the is sent to the server by the client.
      */
-    args?: string[];
-    /**
-     * Function that is executed when the channel is connected to.
-     */
-    execute: (socket: Socket, ...args: any[]) => void;
+    execute: (socket: Socket, data: object) => void;
 }
