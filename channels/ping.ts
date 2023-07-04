@@ -1,7 +1,6 @@
 import { Channel } from "../utils/interfaces";
 import { Socket } from "socket.io";
 import { spawn } from 'child_process';
-import { stdout } from "process";
 
 export interface PingArgs {
     /**
@@ -22,7 +21,7 @@ export interface PingArgs {
     message?: string;
 }
 
-function isPingArgs(obj: object): boolean {
+function isPingArgs(obj: any): boolean {
     try {
         const args = obj as PingArgs;
         return args.source === 'client' || args.source === 'server' &&
@@ -36,8 +35,7 @@ function isPingArgs(obj: object): boolean {
 export const ping: Channel = {
     name: 'ping',
     description: 'Responds with pong and the data that was sent',
-    execute: (socket: Socket, args: object) => {
-        console.log('Ping: received ping from client with args:', args);
+    execute: (socket: Socket, args: any) => {
         // Argument validation
         if (!isPingArgs(args)) {
             console.log('Ping: invalid ping args');
